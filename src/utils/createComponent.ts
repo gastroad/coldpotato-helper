@@ -4,18 +4,9 @@ import * as path from 'path';
 
 type Label = "story" | "style" | "test" | "component" | "index";
 
-export function createFileInDirectory({ directoryPath, type, componentName }: any) {
-    const labelToExtension: Record<Label, string> = {
-        story: `${componentName}.stories.tsx`,
-        style: `${componentName}.scss`,
-        test: `${componentName}.test.tsx`,
-        component: `${componentName}.tsx`,
-        index: `index.ts`
-    };
-    const fileName = labelToExtension[type as Label]
-    const filePath = path.join(directoryPath, fileName);
+export function mapper({ type, componentName }: any) {
 
-    const temp: any = {
+    const labelToContent: Record<Label, string> = {
         story: `import { Meta, StoryObj } from '@storybook/react';
 import ${componentName}, { ${componentName}Props } from './${componentName}';
 
@@ -45,7 +36,23 @@ export default ${componentName}
         test: "",
         index: `export {default} from "./${componentName}"`,
     }
-    fs.writeFile(filePath, temp[type], (err) => {
+
+    const labelToFileName: Record<Label, string> = {
+        story: `${componentName}.stories.tsx`,
+        style: `${componentName}.scss`,
+        test: `${componentName}.test.tsx`,
+        component: `${componentName}.tsx`,
+        index: `index.ts`
+    };
+    return { fileName: labelToFileName[type as Label], content: labelToContent[type as Label] }
+}
+
+export function createFileInDirectory({ directoryPath, type, componentName }: any) {
+    const { fileName, content } = mapper({ type, componentName })
+
+    const filePath = path.join(directoryPath, fileName);
+
+    fs.writeFile(filePath, content, (err) => {
         if (err) {
             console.error('파일 생성 오류:', err);
             return;

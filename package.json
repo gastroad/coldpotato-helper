@@ -14,14 +14,14 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.createDirectory",
+        "command": "extension.createComponent",
         "title": "♽ create ♽"
       }
     ],
     "menus": {
       "explorer/context": [
         {
-          "command": "extension.createDirectory",
+          "command": "extension.createComponent",
           "group": "navigation"
         }
       ]
