@@ -1,7 +1,7 @@
 {
-  "name": "maker",
-  "displayName": "maker",
-  "description": "component maker",
+  "name": "coldpotato-helper",
+  "displayName": "coldpotato-helper",
+  "description": "coldpotatosweet's dev helper",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.81.0"
