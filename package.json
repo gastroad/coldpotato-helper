@@ -14,10 +14,18 @@
   "contributes": {
     "commands": [
       {
-        "command": "maker.helloWorld",
-        "title": "Hello World"
+        "command": "extension.createDirectory",
+        "title": "♽ create ♽"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "extension.createDirectory",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
